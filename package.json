@@ -1,0 +1,47 @@
+{
+  "name": "jsonc2yaml",
+  "version": "1.0.0",
+  "description": "Convert JSONC (JSON with // and /* */ comments) to clean YAML, preserving comments as # comments.",
+  "type": "module",
+  "bin": {
+    "jsonc2yaml": "./jsonc2yaml.mjs"
+  },
+  "main": "./jsonc2yaml.mjs",
+  "exports": "./jsonc2yaml.mjs",
+  "files": [
+    "jsonc2yaml.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node jsonc2yaml.mjs sample.jsonc"
+  },
+  "keywords": [
+    "jsonc",
+    "json",
+    "yaml",
+    "convert",
+    "converter",
+    "comments",
+    "cli",
+    "json5",
+    "config"
+  ],
+  "license": "MIT",
+  "author": "Your Name <you@example.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andxor/jsonc2yaml.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andxor/jsonc2yaml/issues"
+  },
+  "homepage": "https://github.com/andxor/jsonc2yaml#readme",
+  "dependencies": {
+    "comment-json": "^5.0.0",
+    "yaml": "^2.9.0"
+  }
+}
