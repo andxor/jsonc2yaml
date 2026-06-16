@@ -1,6 +1,6 @@
 {
   "name": "jsonc2yaml",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convert JSONC (JSON with // and /* */ comments) to clean YAML, preserving comments as # comments.",
   "type": "module",
   "bin": {
@@ -30,8 +30,8 @@
     "json5",
     "config"
   ],
-  "license": "MIT",
-  "author": "Your Name <you@example.com>",
+  "license": "ISC",
+  "author": "Lapo Luchini <l.luchini@andxor.it>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andxor/jsonc2yaml.git"

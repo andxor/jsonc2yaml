@@ -4,6 +4,7 @@
 //
 // Usage:
 //   jsonc2yaml input.jsonc            # write YAML to stdout
+//   jsonc2yaml input.jsonc out.yaml   # write YAML to a file
 //   jsonc2yaml input.jsonc -o out.yaml
 //   cat input.jsonc | jsonc2yaml      # read from stdin
 //
@@ -11,7 +12,8 @@
 
 import { parse } from 'comment-json';
 import { Document } from 'yaml';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, realpathSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 // --- comment text normalization -------------------------------------------
 // yaml renders a comment as `#` + the string verbatim, so we make each line
@@ -136,9 +138,10 @@ function main() {
     const a = argv[i];
     if (a === '-o' || a === '--output') outFile = argv[++i];
     else if (a === '-h' || a === '--help') {
-      console.log('Usage: jsonc2yaml [input.jsonc] [-o output.yaml]   (reads stdin if no input file)');
+      console.log('Usage: jsonc2yaml [input.jsonc] [output.yaml]   (reads stdin / writes stdout if omitted)');
       return;
     } else if (!inFile) inFile = a;
+    else if (!outFile) outFile = a; // second positional arg is the output file
   }
   const text = inFile ? readFileSync(inFile, 'utf8') : readFileSync(0, 'utf8');
   let yaml;
@@ -152,5 +155,13 @@ function main() {
   else process.stdout.write(yaml);
 }
 
-// run as CLI when executed directly
-if (import.meta.url === `file://${process.argv[1]}`) main();
+// Run as CLI when executed directly.
+function isMainModule() {
+  if (!process.argv[1]) return false;
+  try {
+    return fileURLToPath(import.meta.url) === realpathSync(process.argv[1]);
+  } catch {
+    return false;
+  }
+}
+if (isMainModule()) main();
